@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 .select-background-container {
-  background-image: url("../assets/background/select-background.jpg");
+  background-image: url("../assets/background/select-background2.webp");
   background-size: cover;
   display: flex;
   justify-content: center;
