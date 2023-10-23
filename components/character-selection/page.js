@@ -11,28 +11,27 @@ const CharacterSelection = () => {
 
   // useStates
   const [hoveredPerson, setHoveredPerson] = useState("");
-  const [hoveredPersonAnnounce, setHoveredPersonAnnounce] = useState("");
 
-  const playSound = () => {
-    audioRef.current.play();
+  const navigateAudio = () => {
+    const audio = new Audio("/effect.mp3");
+    audio.play();
   };
 
   const handleMouseEnter = (person) => {
     setHoveredPerson(person.sprite.src);
-    setHoveredPersonAnnounce("");
   };
 
   const handleMouseLeave = () => {
     setHoveredPerson("");
-    setHoveredPersonAnnounce("");
   };
 
   return (
     <main className="select-background-container container mx-auto px-4 py-14 h-screen w-full">
       <div class="flex flex-row gap-1  w-full place-content-evenly items-end">
         <audio ref={audioRef}>
-          <source src={hoveredPersonAnnounce} />
+          <source src={hoveredPerson.audio} />
         </audio>
+
         {hoveredPerson ? (
           <div class="Character">
             <img
