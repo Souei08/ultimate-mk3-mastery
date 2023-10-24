@@ -1,23 +1,28 @@
 "use client";
 
 // React
-import { useRef, useState } from "react";
+import { useState } from "react";
+
+// Third Party Components
+import useSound from "use-sound";
 
 // Assets
-import { row1, row2, row3, row4 } from "@/JSON/characters";
+import { row1, row2, row3, row4 } from "@/json/characters";
+
+// Character Selected Audio Effect
+import soundtest1 from "public/audio/character-selection-effects/select-navigate-audio-1.mp3";
 
 const CharacterSelection = () => {
-  const audioRef = useRef(null);
-
-  // useStates
+  // States
+  const [play] = useSound(soundtest1);
   const [hoveredPerson, setHoveredPerson] = useState("");
 
   const navigateAudio = () => {
-    const audio = new Audio("/effect.mp3");
-    audio.play();
+    play();
   };
 
   const handleMouseEnter = (person) => {
+    navigateAudio();
     setHoveredPerson(person.sprite.src);
   };
 
@@ -27,15 +32,11 @@ const CharacterSelection = () => {
 
   return (
     <main className="select-background-container container mx-auto px-4 py-14 h-screen w-full">
-      <div class="flex flex-row gap-1  w-full place-content-evenly items-end">
-        <audio ref={audioRef}>
-          <source src={hoveredPerson.audio} />
-        </audio>
-
+      <div className="flex flex-row gap-1  w-full place-content-evenly items-end">
         {hoveredPerson ? (
-          <div class="Character">
+          <div className="Character">
             <img
-              class="Character_spritesheet pixelart face-up"
+              className="Character_spritesheet pixelart face-up"
               src={hoveredPerson}
               alt="Character"
               style={{
@@ -49,11 +50,11 @@ const CharacterSelection = () => {
             Select Your Fighter
           </h1>
         )}
-        <div class="flex flex-col gap-1">
-          <div class="flex flex-wrap justify-center">
+        <div className="flex flex-col gap-1">
+          <div className="flex flex-wrap justify-center">
             {row1.map((person) => (
               <div
-                key={person.profile}
+                key={person.id}
                 onMouseEnter={() => handleMouseEnter(person)}
                 onMouseLeave={handleMouseLeave}
                 className="mk-characters-container"
@@ -63,32 +64,41 @@ const CharacterSelection = () => {
               ></div>
             ))}
           </div>
-          <div class="flex flex-wrap justify-center">
+          <div className="flex flex-wrap justify-center">
             {row2.map((person) => (
               <div
+                key={person.id}
+                onMouseEnter={() => handleMouseEnter(person)}
+                onMouseLeave={handleMouseLeave}
                 className="mk-characters-container"
                 style={{
-                  backgroundImage: `url(${person.src})`,
+                  backgroundImage: `url(${person.profile.src})`,
                 }}
               ></div>
             ))}
           </div>
-          <div class="flex flex-wrap justify-center">
+          <div className="flex flex-wrap justify-center">
             {row3.map((person) => (
               <div
+                key={person.id}
+                onMouseEnter={() => handleMouseEnter(person)}
+                onMouseLeave={handleMouseLeave}
                 className="mk-characters-container"
                 style={{
-                  backgroundImage: `url(${person.src})`,
+                  backgroundImage: `url(${person.profile.src})`,
                 }}
               ></div>
             ))}
           </div>
-          <div class="flex flex-wrap justify-center">
+          <div className="flex flex-wrap justify-center">
             {row4.map((person) => (
               <div
+                key={person.id}
+                onMouseEnter={() => handleMouseEnter(person)}
+                onMouseLeave={handleMouseLeave}
                 className="mk-characters-container"
                 style={{
-                  backgroundImage: `url(${person.src})`,
+                  backgroundImage: `url(${person.profile.src})`,
                 }}
               ></div>
             ))}
